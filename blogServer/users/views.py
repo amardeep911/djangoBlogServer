@@ -33,7 +33,15 @@ class UserRegistratiionView(APIView):
 
 class UserLoginView(APIView):
     renderer_classes = [UserRenderer]
+    # def post(self,request, format=None):
+    #     # data = request.data
+    #     # serializer = UserLoginSerializer(data=data)
+    #     # if serializer.is_valid():
+    #     return Response('good', status=status.HTTP_200_OK)
+
     def post(self, request, format=None):
+        
+        print(request.data)
         serializer = UserLoginSerializer(data=request.data)
         if serializer.is_valid(raise_exception=True):
             email = serializer.data.get('email')
@@ -43,7 +51,7 @@ class UserLoginView(APIView):
                 token = get_tokens_for_user(user)
                 return Response({'token':token,'msg': 'Log in Screen'}, status=status.HTTP_200_OK)
             else:
-                return Response({'errors': {'non_field_errors':['Email or password is not valid']}}, status=status.HTTP_400_BAD_REQUEST)
+                return Response({'message': 'password or username not matched'}, status=status.HTTP_400_BAD_REQUEST)
         return Response(serializer._errors, status=status.HTTP_400_BAD_REQUEST)
 
 class UserProfileView(APIView):
