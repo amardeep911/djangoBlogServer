@@ -1,6 +1,7 @@
 from django.contrib import admin
 from users.models import User
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
+from blogmodel.models import Post
 # Register your models here.
 
 class UserAdmin(BaseUserAdmin):
@@ -31,3 +32,4 @@ class UserAdmin(BaseUserAdmin):
 
 # Now register the new UserAdmin...
 admin.site.register(User, UserAdmin)
+admin.site.register(Post)

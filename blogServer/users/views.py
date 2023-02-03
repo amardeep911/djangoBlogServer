@@ -38,7 +38,7 @@ class UserLoginView(APIView):
     #     # serializer = UserLoginSerializer(data=data)
     #     # if serializer.is_valid():
     #     return Response('good', status=status.HTTP_200_OK)
-
+    
     def post(self, request, format=None):
         
         print(request.data)
@@ -53,7 +53,7 @@ class UserLoginView(APIView):
             else:
                 return Response({'message': 'password or username not matched'}, status=status.HTTP_400_BAD_REQUEST)
         return Response(serializer._errors, status=status.HTTP_400_BAD_REQUEST)
-
+    
 class UserProfileView(APIView):
     renderer_classes = [UserRenderer]
     permission_classes = [IsAuthenticated]
