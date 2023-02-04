@@ -46,9 +46,10 @@ class updageSingleBlogView(APIView):
 
 class deleteSingleBlogView(APIView):
     def post(self,request,format=None):
-        
-        # id = request.data.get('blogId')
-        # filteredData = Post.objects.filter(id = id)
+
+        id = request.data.get('blogId')
+
+        Post.objects.filter(id = id).delete()
         return Response({"msg": "to be deleted"})
 
 
