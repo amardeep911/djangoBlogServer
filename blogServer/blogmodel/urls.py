@@ -4,6 +4,7 @@ from users.views import UserLoginView
 from users.views import UserProfileView
 from blogmodel.views import getAllBlogViews
 from blogmodel.views import PostListAPIView
+from blogmodel.views import getSingleBlogView
 
 
 from django.urls import path, include
@@ -12,4 +13,6 @@ urlpatterns = [
     name='getallblog'),
     path('postBlog/', PostListAPIView.as_view(), 
     name='getallblog'),
+    path('getSingleBlog/', getSingleBlogView.as_view(), 
+    name='getSingleBlog'),
 ]

@@ -5,6 +5,7 @@ from rest_framework.views import APIView
 from rest_framework import permissions
 from blogmodel.serializer import PostSerializer
 from blogmodel.models import Post
+from blogmodel.serializer import getSingleBlog
 # Create your views here.
 class getAllBlogViews(APIView):
     def get(self, request, format=None):
@@ -14,6 +15,16 @@ class getAllBlogViews(APIView):
             blogArray.append({"blogTitle": a.blogTitle, "blogContent": a.blogContent,"blogId":a.id})
         # how to extract that specific unique key from my blog model so that i can send it with response
         return Response( {"data" : blogArray} ,content_type="application/json", status=status.HTTP_201_CREATED)
+
+class getSingleBlogView(APIView):
+    def post(self,request,format=None):
+        id = request.data.get('blogId')
+        filteredData = Post.objects.filter(id = id)
+        for object in filteredData:
+            data = {'blogTitle' : object.blogTitle, 'blogContent': object.blogContent}
+            print(data)
+        # print(request.data.blogId)
+        return Response({"data": data}, status=status.HTTP_200_OK)
 
 
 class PostListAPIView(APIView):
