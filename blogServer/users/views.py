@@ -51,7 +51,7 @@ class UserLoginView(APIView):
                 token = get_tokens_for_user(user)
                 return Response({'token':token,'msg': 'Log in Screen'}, status=status.HTTP_200_OK)
             else:
-                return Response({'message': 'password or username not matched'}, status=status.HTTP_400_BAD_REQUEST)
+                return Response({'msg': 'password or username not matched'})
         return Response(serializer._errors, status=status.HTTP_400_BAD_REQUEST)
     
 class UserProfileView(APIView):
