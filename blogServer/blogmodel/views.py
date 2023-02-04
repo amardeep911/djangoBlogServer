@@ -22,9 +22,34 @@ class getSingleBlogView(APIView):
         filteredData = Post.objects.filter(id = id)
         for object in filteredData:
             data = {'blogTitle' : object.blogTitle, 'blogContent': object.blogContent}
-            print(data)
         # print(request.data.blogId)
         return Response({"data": data}, status=status.HTTP_200_OK)
+
+class updageSingleBlogView(APIView):
+    def post(self,request,format=None):
+        id = request.data.get('blogId')
+        
+        filteredData = Post.objects.filter(id = id)
+
+        for object in filteredData:
+            print(object.blogTitle)
+            data = {
+            'blogContent': request.data.get('blogContent'),
+            'blogTitle': request.data.get('blogTitle'),
+             }
+            print(data)
+            serializer = PostSerializer(data=data)
+            if serializer.is_valid():
+                serializer.update(instance=object, validated_data=data)
+                return Response({'msg': 'blog updated'}, status = status.HTTP_201_CREATED,)
+        return Response({"msg":"reached"})
+
+class deleteSingleBlogView(APIView):
+    def post(self,request,format=None):
+        
+        # id = request.data.get('blogId')
+        # filteredData = Post.objects.filter(id = id)
+        return Response({"msg": "to be deleted"})
 
 
 class PostListAPIView(APIView):

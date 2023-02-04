@@ -5,6 +5,7 @@ from users.views import UserProfileView
 from blogmodel.views import getAllBlogViews
 from blogmodel.views import PostListAPIView
 from blogmodel.views import getSingleBlogView
+from blogmodel.views import updageSingleBlogView
 
 
 from django.urls import path, include
@@ -15,4 +16,6 @@ urlpatterns = [
     name='getallblog'),
     path('getSingleBlog/', getSingleBlogView.as_view(), 
     name='getSingleBlog'),
+    path('updateBlog/', updageSingleBlogView.as_view(), 
+    name='updateBlog'),
 ]
