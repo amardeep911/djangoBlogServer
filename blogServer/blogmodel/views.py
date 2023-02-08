@@ -49,7 +49,7 @@ class deleteSingleBlogView(APIView):
 
         id = request.data.get('blogId')
 
-        Post.objects.filter(id = id).delete()
+        filteredData = Post.objects.filter(id = id).delete()
         return Response({"msg": "to be deleted"})
 
 
